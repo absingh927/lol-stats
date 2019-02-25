@@ -1,0 +1,21 @@
+{
+  "name": "lol-summoner-stats",
+  "version": "1.0.0",
+  "scripts": {
+    "client": "cd client && yarn start",
+    "server": "nodemon server.js",
+    "dev": "concurrently --kill-others \"npm run server\" \"npm run client\"",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^6.2.0",
+    "express": "^4.16.3",
+    "helmet": "^3.15.0",
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.0",
+    "nodemon": "^1.18.9"
+  }
+}
