@@ -13,5 +13,5 @@ function baseAPI(region, endpoint, options = {}) {
 
 
 module.exports.getSummonerByName = (username, options = {}) => {
-  baseAPI(`/summoner/v3/summoners/by-name/${username}`, options);
+  baseAPI(`/summoner/v4/summoners/by-name/${username}`, options);
 }

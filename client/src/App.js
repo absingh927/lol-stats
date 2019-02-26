@@ -1,26 +1,20 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import * as React from 'react';
+import { Container } from 'reactstrap';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import Search from './Search/Search';
 
-class App extends Component {
+class App extends React.PureComponent {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Container fluid={true}>
+        <Router>
+          <Switch>
+            <Route exact path='/' component={Search}/>
+            <Route exact render={() => <h1>Opps, Page not found!</h1>} />
+          </Switch>
+        </Router>
+        <footer><small>An ap built with React and ExpressJS.</small></footer>
+      </Container>
     );
   }
 }
