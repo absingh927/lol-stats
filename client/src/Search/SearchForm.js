@@ -17,10 +17,11 @@ export default class SearchForm extends React.PureComponent {
             value={this.state.summonerName}
             onChange={this.handleSummonerNameChange}
             invalid={this.state.isNameInvalid}
+            className='mr-2'
           />
           <FormFeedback>Please enter a Summoner Name in valid format.</FormFeedback>
         </FormGroup>
-        <Button>Search</Button>
+        <Button color='danger'>Search</Button>
       </Form>
     );
   }
