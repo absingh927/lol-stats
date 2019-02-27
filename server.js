@@ -14,7 +14,6 @@ app.use('/api', require('./server/routes'));
 if (process.env.NODE_ENV === 'production') {
   // Serve any static assets first
   app.use(express.static(path.join(__dirname, 'client/build')));
-
   app.get('*', (_, res) => res.sendFile(path.join(__dirname, 'client/build', 'index.html')));
 }
 
