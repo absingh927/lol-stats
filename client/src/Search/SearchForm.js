@@ -9,7 +9,7 @@ export default class SearchForm extends React.PureComponent {
 
   render() {
     return (
-      <Form inline={true} onSubmit={this.handleFromSubmit}>
+      <Form onSubmit={this.handleFromSubmit}>
         <FormGroup>
           <Input
             type='text'
