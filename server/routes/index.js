@@ -3,8 +3,6 @@ const router = express.Router();
 const riotAPI = require('../riotAPI');
 
 // Given a Summoner name, return data containing summer and match info. Will worry about images later.
-
-
 router.get('/summoners/:username', async (req, res) => {
   console.log('req user', req.params.username);
   if (!req.params.username) {
@@ -16,11 +14,42 @@ router.get('/summoners/:username', async (req, res) => {
 
   try {
     const summoner = await riotAPI.getSummonerByName(username);
-    const matches = await riotAPI.getMatchesByAccountID(summoner.accountId, 10);
+    const matches = await riotAPI.getMatchesByAccountID(summoner.accountId, 2);
 
     await asyncForEach(matches, async(match) => {
       const matchData = await riotAPI.getMatchDetailsByID(match.gameId);
-      console.log(matchData);
+
+      // Summoner participantID
+      const playerIndentifier = matchData.participantIdentities.find(pl => pl.player.accountId === summoner.accountId);
+      const player = matchData.participants.find(pl => pl.participantId === playerIndentifier.participantId);
+
+      // spells
+      // const allSpells = riotAPI.getSpells();
+      // const spell1 = allSpells[participant.spell1Id];
+      // const spell2 = allSpells[participant.spell2Id];
+
+      // runes/perks
+      // champion name
+      const allChamps = riotAPI.getChampions();
+      const champion = allChamps[player.championId];
+
+      // items bought
+      const allItems = riotAPI.getItems();
+      const items = [];
+      items.push(allItems[player.stats.item0]);
+      items.push(allItems[player.stats.item1]);
+      items.push(allItems[player.stats.item2]);
+      items.push(allItems[player.stats.item3]);
+      items.push(allItems[player.stats.item4]);
+      items.push(allItems[player.stats.item5]);
+      items.push(allItems[player.stats.item6]);
+
+      // all data to matchdetails.
+      matchDetails.push({
+        champion,
+        items,
+        ...matchData,
+      });
     });
 
     return res.json({
