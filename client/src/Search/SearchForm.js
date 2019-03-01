@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Form, FormGroup, Input, FormFeedback, Button} from 'reactstrap';
+import { Form, FormGroup, Input, Button} from 'reactstrap';
 
 export default class SearchForm extends React.PureComponent {
   state = {
@@ -9,7 +9,10 @@ export default class SearchForm extends React.PureComponent {
 
   render() {
     return (
-      <Form onSubmit={this.handleFromSubmit}>
+      <Form inline onSubmit={this.handleFromSubmit} className='justify-content-center'>
+        {this.state.isNameInvalid && (
+          <div className='d-block invalid-feedback mb-2'>Please enter a Summoner Name in valid format.</div>
+        )}
         <FormGroup>
           <Input
             type='text'
@@ -19,10 +22,10 @@ export default class SearchForm extends React.PureComponent {
             invalid={this.state.isNameInvalid}
             className='mr-2'
           />
-          <FormFeedback>Please enter a Summoner Name in valid format.</FormFeedback>
         </FormGroup>
         <Button color='danger'>Search</Button>
       </Form>
+      
     );
   }
 

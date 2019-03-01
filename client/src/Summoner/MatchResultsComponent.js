@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { getParticipantID, getPlayer, getMatchResult } from './helpers';
 import * as moment from 'moment';
+import { Row } from 'reactstrap';
 
 export default class MatchResultsComponent extends React.PureComponent {
 
@@ -27,7 +28,7 @@ export default class MatchResultsComponent extends React.PureComponent {
     const stats = player.stats;
 
     return (
-      <div className='results-container'>
+      <Row className='results-container'>
         <div>{this.props.champion.name}</div>
         <div>Level {stats.champLevel}</div>
         <div>{matchResult}</div>
@@ -40,7 +41,7 @@ export default class MatchResultsComponent extends React.PureComponent {
         {this.props.items.map((item, index) => item && (
           <div key={index}>{item.name}</div>
         ))}
-      </div>
+      </Row>
     );
   }
 }

@@ -7,7 +7,7 @@ import Summoner from './Summoner/Summoner';
 class App extends React.PureComponent {
   render() {
     return (
-      <Container fluid={true} className='p-0'>
+      <Container fluid={true} className='text-center p-0'>
         <Router>
           <Switch>
             <Route exact path='/' component={Search}/>
@@ -15,7 +15,6 @@ class App extends React.PureComponent {
             <Route exact render={() => <h1>Opps, Page not found!</h1>} />
           </Switch>
         </Router>
-        <footer><small>An ap built with React and ExpressJS.</small></footer>
       </Container>
     );
   }
