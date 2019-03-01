@@ -5,7 +5,8 @@
     "client": "cd client && yarn start",
     "server": "nodemon server.js",
     "dev": "concurrently --kill-others \"yarn start\" \"yarn client\"",
-    "start": "node server.js"
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && yarn && yarn run build"
   },
   "dependencies": {
     "axios": "^0.18.0",
