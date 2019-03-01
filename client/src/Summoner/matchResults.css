@@ -1,0 +1,13 @@
+.results-container .success {
+  background-color: #a3cfec;
+  border-color: #99b9cf;
+}
+
+.results-container .loss {
+  background-color: #e2b6b3;
+  border-color: #cea7a7;
+}
+
+.results-stats-champion img {
+  max-width: 100px;
+}

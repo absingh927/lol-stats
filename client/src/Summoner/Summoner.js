@@ -2,6 +2,7 @@ import * as React from 'react';
 import SearchNav from '../Search/SearchNav';
 import { findUser } from './SummonerService';
 import MatchResultsComponent from './MatchResultsComponent';
+import { Container } from 'reactstrap';
 
 export default class Summoner extends React.Component {
   state = {
@@ -65,11 +66,11 @@ export default class Summoner extends React.Component {
     return (
       <>
         <SearchNav {...this.props} />
-        <div className='summoner-info mt-5'>
+        <div className='summoner-info mt-5 text-left'>
           <h1>{this.state.summoner.name}</h1>
         </div>
         {this.state.matchDetails.length > 0 && (
-          <div className='summoner-history'>
+          <Container className='summoner-history'>
               {this.state.matchDetails.map(match => 
                 <MatchResultsComponent
                   key={match.gameId}
@@ -77,7 +78,7 @@ export default class Summoner extends React.Component {
                   {...match}
                 />
               )}
-          </div>
+          </Container>
         )}
         {this.state.matchDetails.length === 0 && (
           <div className='no-results'>
