@@ -14,7 +14,7 @@ router.get('/summoners/:username', async (req, res) => {
 
   try {
     const summoner = await riotAPI.getSummonerByName(username);
-    const matches = await riotAPI.getMatchesByAccountID(summoner.accountId, 2);
+    const matches = await riotAPI.getMatchesByAccountID(summoner.accountId, 10);
 
     await asyncForEach(matches, async(match) => {
       const matchData = await riotAPI.getMatchDetailsByID(match.gameId);

@@ -1,11 +1,13 @@
 import * as React from 'react';
 import SearchNav from '../Search/SearchNav';
 import { findUser } from './SummonerService';
+import { Row } from 'reactstrap';
+import MatchResultsComponent from './MatchResultsComponent';
 
 export default class Summoner extends React.Component {
   state = {
     summoner: null,
-    matches: null,
+    matchDetails: null,
     isLoading: true
   }
 
@@ -20,7 +22,7 @@ export default class Summoner extends React.Component {
   componentWillReceiveProps(newProps) {
     this.setState({ 
       summoner: null, 
-      matches: null, 
+      matchDetails: null, 
       isLoading: true 
     });
 
@@ -32,7 +34,7 @@ export default class Summoner extends React.Component {
       const data = await findUser(username);
       this.setState({
         summoner: data.summoner,
-        matches: data.matches,
+        matchDetails: data.matchDetails,
         isLoading: false
       });
 
@@ -52,7 +54,6 @@ export default class Summoner extends React.Component {
         </>
       );
     } else if (!this.state.summoner) {
-      console.log(this.props.match.params.summonerName);
       return (
         <>
           <SearchNav {...this.props} />
@@ -66,11 +67,27 @@ export default class Summoner extends React.Component {
       <>
         <SearchNav {...this.props} />
         <div className='summoner-info'>
-          <div>{this.state.summoner.name}</div>
+          <h1>{this.state.summoner.name}</h1>
           <div>{this.state.summoner.summonerLevel}</div>
         </div>
+        {this.state.matchDetails.length > 0 && (
+          <div className='summoner-history'>
+            <h4>Recent Matches</h4>
+            <Row>
+              {this.state.matchDetails.map(match => 
+                <MatchResultsComponent
+                  key={match.gameId}
+                  summoner={this.state.summoner}
+                  {...match}
+                />
+              )}
+            </Row>
+            {this.state.matchDetails.length === 0 && (
+              <h2>No recent matches.</h2>
+            )}
+          </div>
+        )}
       </>
     );
-
   }
 }
